@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/aside.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/search.css">
+    <title>Document</title>
+</head>
+<body>
+<!-- 왼쪽 메뉴바 나중에 <aside> 부분 분리 -->
+<aside class="aside-list-l">
+    <div class="aside-inner-div">
+        <a class="aside-a-s" href="">
+            <img class="-img-logo" src="../images/logo.png"/>
+            <label class="-m-label">Employee Management</label>
+        </a>
+    </div>
+    <hr class="aside-inner-s-hr">
+    <div class="aside-select-div">
+        <p class="aside-select-text">구현기능목록1</p>
+        <ul class="aside-option-menu">
+            <li><a href="">직원조회</a></li>
+            <li><a href="">신규 입사자 등록</a></li>
+            <li><a href="">퇴사자 관리</a></li>
+            <li><a href="">인적 정보 변경</a></li>
+        </ul>
+    </div>
+    <hr class="aside-inner-s-hr">
+    <div class="aside-select-div">
+        <p class="aside-select-text">구현기능목록2</p>
+        <ul class="aside-option-menu">
+            <li><a href="">근퇴현황</a></li>
+            <li><a href="">연차관리</a></li>
+            <li><a href="">휴가신청/승인</a></li>
+        </ul>
+    </div>
+</aside>
+
+<!-- 메인 영역 -->
+<main>
+    <!-- 메인 헤더 영역 -->
+    <div class="main-header-box">
+        <div class="main-header-menu">
+            <p>평가 및 교육</p>
+        </div>
+        <div class="main-header-menu">
+            <a href="">여기엔 뭐가??</a>
+        </div>
+    </div>
+
+    <!-- 찐 메인 콘텐츠 -->
+    <div class="main-content-box">
+        <!-- 메인 콘텐츠 상단 -->
+        <div class="content-top-s">
+            <div class="content-top-item">
+                뭐 넣을까요?
+            </div>
+            <div class="content-top-item">
+                뭐 넣을까요?
+            </div>
+            <div class="content-top-item">
+                뭐 넣을까요?
+            </div>
+        </div>
+
+        <!-- 메인 콘텐츠 하단 -->
+        <div class="content-bottom">
+            <div class="bottom-top-line">
+                <form action="#" method="post">
+                    <!-- 기업 고유 번호 또는 기업 아이디 -->
+                    <input type="hidden" name=""/>
+
+                    <div class="search-box">
+                        <img src="../images/search-icon.png"/>
+                        <input type="text" placeholder="조회할 검색어를 입력하세요"/>
+                    </div>
+                    <label>검색 옵션</label>
+                    <select class="select-box" tabindex="0";>
+                        <option value="">부서</option>
+                        <option value="">이름</option>
+                        <option value="">직급</option>
+                    </select>
+                    <button type="submit">
+                        확인
+                    </button>
+                </form>
+            </div>
+            <div class="bottom-bottom-line">
+                <table>
+                    <tr>
+                        <th>제목1</th>
+                        <th>제목2</th>
+                        <th>제목3</th>
+                        <th>제목4</th>
+                        <th>제목5</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                    </tr>
+                </table>
+                <form action="" method="post">
+                    <div class="order-box">
+                        <!-- 이거 기능 구현할거면 조회했던 데이터 input hidden 으로 담아야 됩니다. -->
+                        <input type="hidden" name="" value=""/>
+                        <input type="hidden" name="" value=""/>
+                        <input type="hidden" name="" value=""/>
+                        <input type="hidden" name="" value=""/>
+                        <input type="hidden" name="" value=""/>
+                        <input type="hidden" name="" value=""/>
+                        <p>정렬 옵션</p>
+                        <button type="submit">이름</button>
+                        <button type="submit">부서</button>
+                        <button type="submit">입사일</button>
+                        <button type="submit">뭐</button>
+                        <button type="submit">뭐</button>
+                        <button type="submit">뭐</button>
+                    </div>
+                </form>
+            </div>
+            <table class="paging-table">
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

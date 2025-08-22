@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/aside.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/empadd.css">
+  <title>Project-1 직원추가</title>
+</head>
+<body>
+<!-- 왼쪽 메뉴바 나중에 <aside> 부분 분리 -->
+<aside class="aside-list-l">
+    <div class="aside-inner-div">
+        <a class="aside-a-s" href="">
+            <img class="-img-logo" src="../images/logo.png"/>
+            <label class="-m-label">Employee Management</label>
+        </a>
+    </div>
+    <hr class="aside-inner-s-hr">
+    <div class="aside-select-div">
+        <p class="aside-select-text">구현기능목록1</p>
+        <ul class="aside-option-menu">
+            <li><a href="">직원조회</a></li>
+            <li><a href="">신규 입사자 등록</a></li>
+            <li><a href="">퇴사자 관리</a></li>
+            <li><a href="">인적 정보 변경</a></li>
+        </ul>
+    </div>
+    <hr class="aside-inner-s-hr">
+    <div class="aside-select-div">
+        <p class="aside-select-text">구현기능목록2</p>
+        <ul class="aside-option-menu">
+            <li><a href="">근퇴현황</a></li>
+            <li><a href="">연차관리</a></li>
+            <li><a href="">휴가신청/승인</a></li>
+        </ul>
+    </div>
+</aside>
+
+<!-- 메인 영역 -->
+<main>
+    <!-- 메인 헤더 영역 -->
+    <div class="main-header-box">
+        <div class="main-header-menu">
+            <p>직원 등록</p>
+        </div>
+        <div class="main-header-menu">
+            <a href="">여기엔 뭐가??</a>
+        </div>
+    </div>
+
+    <!-- 찐 메인 콘텐츠 -->
+    <div class="employee_add_box">
+      <form>
+        <!-- 기업 고유 번호 -->
+        <input type="hidden" name=""/>
+        <div>
+          <hr class="hr-m">
+          <p>직원사진등록(할까여?)</p>
+          <textarea></textarea>
+          <hr class="hr-m">
+          <p>직원정보</p>
+          <div>
+            <label>이름</label>
+            <input type="text" name=""/>
+          </div>
+          <div>
+            <label>성별</label>
+            <input type="text" name=""/>
+          </div>
+          <div>
+            <label>생년월일</label>
+            <input type="text" name=""/>
+          </div>
+          <div>
+            <label>주소</label>
+            <input type="text" name=""/>
+            <button type="button">주소 조회</button>
+          </div>
+          <div>
+            <label>전화번호</label>
+            <input type="text" name=""/>
+          </div>
+          <div>
+            <label>이메일</label>
+            <input type="text" name=""/>
+          </div>
+          <hr class="hr-m">
+          <p>부서정보</p>
+          <div>
+            <label>부서</label>
+            <input type="text" name=""/>
+            <button type="button">부서 조회</button>
+          </div>
+          <div>
+            <label>직급</label>
+            <input type="text" name=""/>
+          </div>
+        </div>
+      </form>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,16 @@
+insert into departments (department_id, department_name, manager_id) values (1010,'총무 경비팀',null);
+insert into departments (department_id, department_name, manager_id) values (1020,'총무 시설관리팀',null);
+insert into departments (department_id, department_name, manager_id) values (2010,'재무회계 1팀',null);
+insert into departments (department_id, department_name, manager_id) values (2020,'재무회계 2팀',null);
+insert into departments (department_id, department_name, manager_id) values (2030,'감사팀',null);
+insert into departments (department_id, department_name, manager_id) values (3010,'영업 1팀',null);
+insert into departments (department_id, department_name, manager_id) values (3020,'영업 2팀',null);
+insert into departments (department_id, department_name, manager_id) values (3030,'영업 3팀',null);
+insert into departments (department_id, department_name, manager_id) values (4010,'자재관리팀',null);
+insert into departments (department_id, department_name, manager_id) values (5010,'가공 1팀',null);
+insert into departments (department_id, department_name, manager_id) values (5020,'가공 2팀',null);
+insert into departments (department_id, department_name, manager_id) values (6010,'생산 1라인',null);
+insert into departments (department_id, department_name, manager_id) values (6020,'생산 2라인',null);
+insert into departments (department_id, department_name, manager_id) values (6030,'생산 3라인',null);
+insert into departments (department_id, department_name, manager_id) values (7010,'운송 1팀',null);
+insert into departments (department_id, department_name, manager_id) values (8010,'안전관리팀',null);

@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/* reset.css */
+body {
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+}
+form {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+
+    display: contents;
+}
+* {
+    box-sizing: border-box;
+}

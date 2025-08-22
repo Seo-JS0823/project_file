@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/aside.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/depart.css">
+  <title>Project-1 부서추가/목록</title>
+</head>
+<body>
+<!-- 왼쪽 메뉴바 나중에 <aside> 부분 분리 -->
+<aside class="aside-list-l">
+    <div class="aside-inner-div">
+        <a class="aside-a-s" href="">
+            <img class="-img-logo" src="../images/logo.png"/>
+            <label class="-m-label">Employee Management</label>
+        </a>
+    </div>
+    <hr class="aside-inner-s-hr">
+    <div class="aside-select-div">
+        <p class="aside-select-text">구현기능목록1</p>
+        <ul class="aside-option-menu">
+            <li><a href="">직원조회</a></li>
+            <li><a href="">신규 입사자 등록</a></li>
+            <li><a href="">퇴사자 관리</a></li>
+            <li><a href="">인적 정보 변경</a></li>
+        </ul>
+    </div>
+    <hr class="aside-inner-s-hr">
+    <div class="aside-select-div">
+      <p class="aside-select-text">구현기능목록2</p>
+      <ul class="aside-option-menu">
+        <li><a href="">근퇴현황</a></li>
+        <li><a href="">연차관리</a></li>
+        <li><a href="">휴가신청/승인</a></li>
+      </ul>
+    </div>
+  </aside>
+  
+  <!-- 메인 영역 -->
+  <main>
+    <!-- 메인 헤더 영역 -->
+    <div class="main-header-box">
+      <div class="main-header-menu">
+        <p>부서관리</p>
+      </div>
+      <div class="main-header-menu">
+        <a href="">여기엔 뭐가??</a>
+      </div>
+    </div>
+    
+    <div class="department_add">
+          <form action="" method="post">
+            <div class="department_box">
+              <p class="department_head">부서추가</p>
+              <div class="head_menu">
+                <label>부서 ID</label><input type="text" name=""/>
+              </div>
+              <div class="head_menu">
+                <label>부서명</label><input type="text" name=""/>
+              </div>
+              <div class="head_menu">
+                <label>부서 담당자</label><input type="text" name=""/>
+              </div>
+              <div class="head_menu">
+                <div>
+                  <button type="submit">등록</button>
+                  <button type="button">취소</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="department_box">
+            <p class="department_head">부서목록</p>
+            <div>
+              <table>
+                <colgroup>
+                  <col style="width: 100px;">
+                  <col>
+                  <col style="width: 100px">
+                  <col style="width: 70px">
+                </colgroup>
+                <tr>
+                  <th>부서ID</th>
+                  <th>부서이름</th>
+                  <th>부서담당자</th>
+                  <th>인원</th>
+                </tr>
+                <tr>
+                  <td>데이타</td>
+                  <td>데이타</td>
+                  <td>데이타</td>
+                  <td>데이타</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+    </div>
+    
+  </main>
+</body>
+</html>

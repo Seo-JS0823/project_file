@@ -1,0 +1,187 @@
+@charset "UTF-8";
+/* 왼쪽 사이드바 사이즈 L */
+.aside-list-l {
+    width: 250px;
+    min-width: 250px;
+    height: 200%;
+    background-color: #0E8B63;
+
+    padding-left: 0px;
+
+    border-right: 5px solid #67ac70;
+}
+
+/* 왼쪽 사이드바 사이즈 M */
+.aside-list-m {
+    width: 200px;
+    min-width: 250px;
+    height: 200%;
+    background-color: #0E8B63;
+    
+    padding-left: 0px;
+
+    border-right: 5px solid #67ac70;
+}
+
+/* 왼쪽 사이드바 (a 태그) 사이즈 S */
+.aside-a-s {
+    display: flex;
+    flex-direction: row;
+
+    width: auto;
+    min-width: 200px;
+    line-height: 30px;
+
+    vertical-align: middle;
+    
+    text-align: left;
+    text-decoration: none;
+    color: white;
+}
+
+/* 왼쪽 사이드바 (a 태그) 사이즈 M */
+.aside-a-m {
+    display: inline-block;
+
+    width: auto;
+    min-width: 300px;
+    line-height: 35px;
+
+    text-align: left;
+    text-decoration: none;
+    color: white;
+}
+
+/* 왼쪽 사이드바 HR 사이즈 S */
+.aside-inner-s-hr {
+    width: 90%;
+    margin: 0px 0px 5px 10px;
+    
+    height: 3px;
+
+    border-style: none;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+
+    background-color: white;
+}
+
+/* 왼쪽 사이드바 HR 사이즈 M */
+.aside-inner-m-hr {
+    width: 90%;
+    margin: 0px 0px 5px 10px;
+
+    height: 4.5px;
+
+    border-style: none;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+
+    background-color: white;
+}
+
+/* 왼쪽 사이드바 Div 영역 */
+.aside-inner-div {
+    display: flex;
+    flex-direction: row;
+
+    width: 90%;
+    margin: 5px 0px 5px 10px;
+}
+
+/* 왼쪽 사이드바 Select Div 영역 */
+.aside-select-div {
+    position: relative;
+
+    display: flex;
+
+    width: 160px;
+    padding: 10px;
+    padding-left: 30px;
+    cursor: pointer;
+
+    .aside-select-text {
+        display: inline-block;
+        margin: 0px;
+        padding: 0px;
+
+        color: white;
+
+        font-size: 20px;
+    }
+
+    .aside-option-menu {
+        display: none;
+        position: absolute;
+
+        padding: 0;
+        z-index: 10;
+
+        top: 0;
+        left: 80%;
+        width: 200px;
+
+        background-color: white;
+
+        border-radius: 12px;
+        padding-left: 10px;
+
+        list-style: none;
+
+        border: 2px solid #F3F3F3;
+
+        li {
+            padding: 10px;
+
+            a {
+                text-decoration: none;
+                color: #999;
+                display: block;
+
+                font-size: 15px;
+            }
+        }
+
+    }
+
+}
+
+.aside-select-div:hover .aside-option-menu {
+    display: block;
+}
+
+/* 라벨 스몰 사이즈 */
+.-s-label {
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+
+    font-size: 15px;
+    color: white;
+}
+
+/* 라벨 미들 사이즈 */
+.-m-label {
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+
+    font-size: 20px;
+    color: white;
+}
+
+/* 라벨 라지 사이즈 */
+.-l-label {
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+
+    font-size: 25px;
+    color: white;
+}
+
+/* aside 로고 이미지 */
+.-img-logo {
+    width: 50px;
+    margin: 0px;
+}

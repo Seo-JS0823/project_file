@@ -1,0 +1,18 @@
+insert into positions (position_id, position_name) values (11,'사원');
+insert into positions (position_id, position_name) values (12,'대리');
+insert into positions (position_id, position_name) values (13,'과장');
+insert into positions (position_id, position_name) values (14,'차장');
+insert into positions (position_id, position_name) values (15,'부장');
+insert into positions (position_id, position_name) values (21,'생산사원');
+insert into positions (position_id, position_name) values (22,'A팀 반장');
+insert into positions (position_id, position_name) values (23,'B팀 반장');
+insert into positions (position_id, position_name) values (24,'생산반장');
+insert into positions (position_id, position_name) values (25,'생산부팀장');
+insert into positions (position_id, position_name) values (26,'생산본부장');
+insert into positions (position_id, position_name) values (31,'가공사원');
+insert into positions (position_id, position_name) values (32,'가공반장');
+insert into positions (position_id, position_name) values (41,'운송사원');
+insert into positions (position_id, position_name) values (42,'운송팀장');
+insert into positions (position_id, position_name) values (43,'운송본부장');
+insert into positions (position_id, position_name) values (51,'안전관리본부장');
+
