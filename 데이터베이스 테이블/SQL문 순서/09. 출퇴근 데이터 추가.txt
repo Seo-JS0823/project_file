@@ -1,0 +1,19 @@
+INSERT INTO attendance_record
+   (currentDate, employee_id, atte_start, atte_end, atte_flag)
+SELECT
+   D.currentDate,
+   E.employee_id,
+   INTERVAL '06:59:50' HOUR TO SECOND,
+   INTERVAL '17:31:00' HOUR TO SECOND,
+   1
+FROM (
+SELECT TO_DATE('25/05/01', 'RR/MM/DD') + LEVEL - 1 AS currentDate
+FROM DUAL
+CONNECT BY LEVEL <= (TO_DATE('25/08/22', 'RR/MM/DD') - TO_DATE('25/05/01', 'RR/MM/DD') + 1)
+) D
+CROSS JOIN (
+   SELECT employee_id FROM employees
+   WHERE ROWNUM <= 26
+) E
+WHERE
+   TO_CHAR(D.currentDate, 'DY', 'NLS_DATE_LANGUAGE=ENGLISH') NOT IN ('SAT', 'SUN');

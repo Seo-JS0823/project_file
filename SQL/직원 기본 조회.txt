@@ -1,0 +1,37 @@
+# 직원 / 소속부서 / 부서 담당자 이름
+SELECT 
+    E.employee_id AS employee_id,
+    E.name AS employee_name,
+    D.department_name AS department_name,
+    NVL(M.name, '미지정') AS manager_name
+FROM
+   employees E
+JOIN
+   departments D 
+ON
+   E.department_id = D.department_id
+LEFT JOIN
+   employees M 
+ON
+   D.manager_id = M.employee_id;
+
+# 해당 쿼리 Create View ==============================================================
+CREATE VIEW DEP_MANAGER_NAME AS
+SELECT 
+    E.employee_id AS employee_id,
+    E.name AS employee_name,
+    D.department_name AS department_name,
+    NVL(M.name, '미지정') AS manager_name
+FROM
+   employees E
+JOIN
+   departments D 
+ON
+   E.department_id = D.department_id
+LEFT JOIN
+   employees M 
+ON
+   D.manager_id = M.employee_id;
+
+# View 사용한 Select 문 =============================================================
+SELECT * FROM DEP_MANAGER_NAME WHERE employee_name = '나안해';

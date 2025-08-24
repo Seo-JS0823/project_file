@@ -1,0 +1,66 @@
+[ADDRESS TABLE] 주소 테이블 ==> AJAX 검색용
+주소코드		: ADDRESS_ID
+시도			: PROVINCE
+구군			: DISTRICT
+도로명			: ROAD_NAME
+건물명			: BUILDING
+검색용 주소 문자열	: SEARCH
+
+[POSITIONS TABLE] 직급 테이블
+직급코드		: POSITION_ID
+직급			: POSITION_NAME
+
+[WORKTYPES TABLE] 근무형태 테이블
+근무형태코드		: WORKTYPE_ID
+근무형태		: WORKTYPE
+
+[DEPARTMENTS TABLE] 부서 테이블
+부서코드		: DEPARTMENT_ID
+부서이름		: DEPARTMENT_NAME
+담당자 사번		: MANAGER_ID
+담당자 이름		: MANAGER_NAME
+
+[EMPLOYEES TABLE] 직원 테이블
+사번코드(Java 자동생성)	: EMPLOYEE_ID
+직원의 소속 부서코드	: DEPARTMENT_ID		부서 테이블 	FK
+근무형태코드		: WORKTYPE_ID		근무형태 테이블	FK
+직급코드		: POSITION_ID		직급 테이블	FK
+이름			: NAME
+성별			: GENDER		"남" or "여"
+생년월일		: BIRTHDATE
+전화번호		: PHONE_NUM
+이메일			: EMAIL
+주소			: ADDRESS		주소 테이블에서 검색한 PROVINCE || ' ' || SEARCH 가 들어감
+입사일			: EMPLOYMENT_DATE
+재직 상태 플래그	: EMP_FLAG
+
+[ATTENDANCE_RECORD TABLE] 출퇴근 기록 테이블
+오늘 날짜		: CURRENTDATE		제약조건을 설정해서 DATE 타입에서 시간이 잘리고 날짜만 저장됨
+사번코드		: EMPLOYEE_ID
+출근한 시각		: ATTE_START		INTERVAL 타입 SELECT 할 때 TO_CHAR(CURRENTDATE + ATTE_START, 'HH24"시" MI"분"') AS ATTE_START
+퇴근한 시각		: ATTE_END		INTERVAL 타입 SELECT 할 때 TO_CHAR(CURRENTDATE + ATTE_START, 'HH24"시" MI"분"') AS ATTE_START
+총 근무한 시각		: WORK_TIME		INTERVAL 타입 SELECT 할 때 TO_CHAR(CURRENTDATE + ATTE_START, 'HH24"시" MI"분"') AS ATTE_START
+초과근무한 시간		: OT_WORK_TIME		INTERVAL 타입 SELECT 할 때 TO_CHAR(CURRENTDATE + ATTE_START, 'HH24"시" MI"분"') AS ATTE_START
+초과근무한 사유		: OT_CONTENT
+상태 플래그		: ATTE_FLAG
+			: 0 = 정상출근 / 1 = 정상퇴근 / 2 = 조퇴 / 3 = 지각 / 4 = 결석 / 5 = 초과근무
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

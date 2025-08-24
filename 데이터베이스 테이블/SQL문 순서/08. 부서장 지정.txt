@@ -1,0 +1,7 @@
+UPDATE departments SET manager_id = '10206512540', manager_name = '엄근진' WHERE department_id = 1020;
+UPDATE departments SET manager_id = '40108415965', manager_name = '대대장' WHERE department_id = 4010;
+UPDATE departments SET manager_id = '30106192869', manager_name = '박과장' WHERE department_id = 3010;
+UPDATE departments SET manager_id = '50107650979', manager_name = '나미숙' WHERE department_id = 5010;
+UPDATE departments SET manager_id = '60208317049', manager_name = '풀무원' WHERE department_id = 6020;
+UPDATE departments SET manager_id = '70107563041', manager_name = '나총알' WHERE department_id = 7010;
+commit;

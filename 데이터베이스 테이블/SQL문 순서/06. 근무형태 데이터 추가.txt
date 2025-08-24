@@ -1,0 +1,4 @@
+insert into worktypes (worktype_id, worktype) values (1,'정규직');
+insert into worktypes (worktype_id, worktype) values (2,'계약직');
+insert into worktypes (worktype_id, worktype) values (3,'파견직');
+insert into worktypes (worktype_id, worktype) values (4,'일용직');

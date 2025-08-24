@@ -1,0 +1,2 @@
+alter table departments add constraint EMP_MNG_ID foreign key (manager_id) references employees (employee_id);
+alter table attendance_record add constraint ATTE_DATE_EMP_ID CHECK (currentDate = TRUNC(currentDate));

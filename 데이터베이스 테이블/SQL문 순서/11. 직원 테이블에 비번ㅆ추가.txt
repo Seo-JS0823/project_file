@@ -1,0 +1,34 @@
+# 컬럼추가
+ALTER TABLE employees ADD PASSWORD VARCHAR2(20);
+
+# 컬럼 순서 변경
+alter table employees modify department_id INVISIBLE;
+alter table employees modify worktype_id INVISIBLE;
+alter table employees modify position_id INVISIBLE;
+alter table employees modify name INVISIBLE;
+alter table employees modify birthdate INVISIBLE;
+alter table employees modify phone_num INVISIBLE;
+alter table employees modify address INVISIBLE;
+alter table employees modify employment_date INVISIBLE;
+alter table employees modify emp_flag INVISIBLE;
+alter table employees modify gender INVISIBLE;
+alter table employees modify email INVISIBLE;
+
+alter table employees modify department_id VISIBLE;
+alter table employees modify worktype_id VISIBLE;
+alter table employees modify position_id VISIBLE;
+alter table employees modify name VISIBLE;
+alter table employees modify gender VISIBLE;
+alter table employees modify email VISIBLE;
+alter table employees modify birthdate VISIBLE;
+alter table employees modify phone_num VISIBLE;
+alter table employees modify address VISIBLE;
+alter table employees modify employment_date VISIBLE;
+alter table employees modify emp_flag VISIBLE;
+
+# password 값 추가
+UPDATE
+   employees
+SET
+   password = TO_CHAR(employment_date, 'YYYYMMDD');
+commit;
