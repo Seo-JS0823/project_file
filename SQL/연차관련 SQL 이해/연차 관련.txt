@@ -1,0 +1,58 @@
+-- 특정 월(예: 2025년 07월)에 직원별 정상 출근 일수 카운트
+SELECT
+   E.employee_id, E.name, count(*) AS work_days
+FROM
+   attendance_record A, employees E
+WHERE
+   A.employee_id = E.employee_id AND
+   TO_CHAR(A.currentdate, 'yyyy-mm') = '2025-05' AND
+   A.atte_flag = 1 OR A.atte_flag = 5
+GROUP BY E.employee_id, E.name;
+
+-- 특정 월의 한달 평일 수 (공휴일 제외 안하고)
+SELECT
+   count(*) AS work_days
+FROM
+(
+SELECT
+   TO_DATE('2025-05-01', 'yyyy-mm-dd') + LEVEL - 1 AS DT
+FROM
+   DUAL
+CONNECT BY LEVEL <= last_day(TO_DATE('2025-05-01', 'yyyy-mm-dd')) - TO_DATE('2025-05-01', 'yyyy-mm-dd') + 1
+)
+WHERE
+   TO_CHAR(DT,'D') not in ('1', '7');
+
+-- MERGE INTO 구문으로 UPDATE & INSERT
+MERGE INTO annualleave A
+USING (
+   SELECT
+      employee_id, attend_cnt, workday_count.cnt AS workday_cnt
+   FROM (
+      SELECT
+         employee_id, COUNT(DISTINCT currentDate) AS attend_cnt
+      FROM
+         attendance_record
+      WHERE
+         TO_CHAR(currentDate, 'yyyy-mm') = '2025-05' AND
+         (atte_flag = 1 OR atte_flag = 5)
+      GROUP BY employee_id
+   ) emp_atte
+   CROSS JOIN (
+      SELECT
+         COUNT(*) AS cnt
+      FROM
+         dual
+      WHERE
+         TO_CHAR(TO_DATE('2025-05-01', 'yyyy-mm-dd') + LEVEL -1, 'D') NOT IN ('1', '7')
+      CONNECT BY LEVEL <= LAST_DAY(TO_DATE('2025-05-01', 'yyyy-mm-dd')) - TO_DATE('2025-05-01', 'yyyy-mm-dd') + 1
+   ) SRC
+   ON (
+      A.employee_id = SRC.employee_id AND A.year = TO_DATE('2025', 'yyyy'))
+WHEN MATCHED THEN
+   UPDATE SET A.over_leave_cnt = A.over_leave_cnt + 1
+WHEN NOT MATCHED THEN
+   INSERT
+      (employee_id, year, over_leave_cnt, use_leave_cnt)
+   VALUES
+      (SRC.employee_id, TO_DATE('2025', 'yyyy'), 1, 0);

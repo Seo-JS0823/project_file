@@ -1,0 +1,24 @@
+MERGE = INSERT + UPDATE
+있으면 UPDATE, 없으면 INSERT -> 이걸 한 번에 실행
+
+기본 MERGE 구조
+MERGE INTO 테이블명 A
+USING (조건에 맞는 데이터셋) SRC
+ON (A.기존데이터 = SRC.신규데이터)
+WHEN MATCHED THEN
+   UPDATE SET ...
+WHEN NOT MATCHED THEN
+   INSERT (...)
+   VALUES (...);
+
+INTO  : 대상 테이블 (연차를 기록할 Annualleave 테이블)
+USING : 비교할 데이터 집합 (= 이번 달 만근한 직원들)
+ON    : 기존 데이터와 신규 데이터 매칭 조건
+------------------------------------------------------
+WHEN MATCHED     : 기존에 있으면 UPDATE
+WHEN NOT MATCHED : 기존에 없으면 INSERT
+
+순서
+1. 만근자 명단(SRC) 준비
+2. annualleave 테이블과 비교
+3. 이미 있으면 연차 수만 UPDATE, 없으면 새로 추가

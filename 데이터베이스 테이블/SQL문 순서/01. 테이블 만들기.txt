@@ -1,17 +1,21 @@
+# 검수 완료
 create table positions(
 position_id number(2,0) primary key,
 position_name varchar2(25) not null);
 
+# 검수 완료
 create table worktypes(
 worktype_id number(1,0) primary key,
 worktype varchar2(15) not null);
 
+# 검수 완료
 create table departments(
 department_id number(4,0) primary key,
 department_name varchar2(30) not null,
 manager_id varchar2(13) null,
 manager_name varchar2(15) null);
 
+# 검수 완료
 create table employees(
 employee_id varchar2(13) primary key,
 password varchar2(20) not null,
@@ -39,6 +43,7 @@ foreign key
 references
     positions (position_id));
 
+# 검수 완료
 create table annualleave(
 employee_id varchar2(13) not null,
 year date not null,
@@ -51,6 +56,7 @@ references
 primary key
     (employee_id, year));
 
+# 검수 완료
 create table leave_history(
 seq number primary key,
 employee_id varchar2(13) not null,
@@ -65,6 +71,7 @@ foreign key
 references
     employees (employee_id));
 
+# 검수 완료
 create table attendance_record(
 currentDate date default sysdate not null,
 employee_id varchar2(13) not null,
@@ -77,6 +84,7 @@ atte_flag number(1,0) not null,
 foreign key (employee_id) references employees (employee_id),
 primary key (currentDate, employee_id));
 
+# 검수 완료
 create table lateness(
 employee_id varchar2(13) null,
 ness_date date not null,
