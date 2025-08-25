@@ -30,5 +30,5 @@ alter table employees modify emp_flag VISIBLE;
 UPDATE
    employees
 SET
-   password = TO_CHAR(employment_date, 'YYYYMMDD');
+   password = TO_CHAR(birthdate, 'YYYYMMDD');
 commit;

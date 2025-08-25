@@ -46,9 +46,11 @@ USING (
       WHERE
          TO_CHAR(TO_DATE('2025-05-01', 'yyyy-mm-dd') + LEVEL -1, 'D') NOT IN ('1', '7')
       CONNECT BY LEVEL <= LAST_DAY(TO_DATE('2025-05-01', 'yyyy-mm-dd')) - TO_DATE('2025-05-01', 'yyyy-mm-dd') + 1
+      ) workday_count
    ) SRC
    ON (
-      A.employee_id = SRC.employee_id AND A.year = TO_DATE('2025', 'yyyy'))
+        A.employee_id = SRC.employee_id AND A.year = TO_DATE('2025', 'yyyy')
+      )
 WHEN MATCHED THEN
    UPDATE SET A.over_leave_cnt = A.over_leave_cnt + 1
 WHEN NOT MATCHED THEN
