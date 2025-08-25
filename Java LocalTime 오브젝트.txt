@@ -1,0 +1,16 @@
+LocalTime 오브젝트
+
+LocalTime time1 = LocalTime.of(9, 30);
+LocalTime time2 = LocalTime.of(10, 0);
+
+
+// 호출 객체가 파라미터 객체보다 시간이 빠를시 true
+boolean isBefore = time1.isBefore(time2); // true
+
+
+// 호출 객체가 파라미터 객체보다 시간이 늦을 시 true
+boolean isAfter = time1.isAfter(time2);   // false
+
+
+// 두 시간이 완전히 동일한지
+boolean isEqual = time1.isEqual(time2);   // false
