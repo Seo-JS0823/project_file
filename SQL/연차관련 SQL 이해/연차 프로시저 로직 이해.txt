@@ -47,6 +47,120 @@ END;
 /
 ==================================================================================================================================
 
+1. 프로시저 선언부
+CREATE OR REPALCE PROCEDURE USE_ANNUAL_LEAVE(p_emp_id IN VARCHAR2, p_use_days IN NUMBER) IS
+> p_emp_id   : 연차를 사용할 직원의 ID 입력 파라미터
+> p_use_days : 사용하려는 연차 일수 입력 파라미터
+> IS         : IS 키워드로 프로시저 본문의 시작을 알림
+
+
+2. 변수 선언
+> v_leave NUMBER := p_use_days; : 현재 차감해야 할 연차 수를 임시로 저장함 (초기값 = 사용하려는 연차)
+> v_remaining NUMBER;           : 직원의 총 남은 연차를 계산해서 저장할 변수
+
+
+3. 총 남은 연차를 계산함
+SELECT
+   NVL(SUM(over_leave_cnt) - SUM(use_leave_cnt), 0)
+INTO
+   v_remaining
+FROM
+   annualleave
+WHERE
+   employee_id = p_emp_id;
+> SUM(over_leave_cnt)          : 적립된 연차의 총합을 의미
+> SUM(use_leave_cnt)           : 사용했던 연차의 총합을 의미
+> NVL(...)                     : 연차 연산이 NULL인 경우 0으로 처리함
+> INTO v_remaining             : 위에서 선언했던 변수에 계산된 값을 v_remaining에 저장
+> WHERE employee_id = p_emp_id : 특정 직원만 조회함(이때는 당연히 연차를 신청한 직원 본인이 되는것)
+
+
+4. 사용할 연차수에 비해 보유한 연차수가 적은 경우 오류로 처리
+IF v_remaining < p_use_days THEN
+   RAISE_APPLICATION_ERROR(-20001, '남은 연차가 부족합니다.');
+END IF;
+> 총 남은 연차가 요청한 연차보다 적을 때 프로시저를 종료함
+> RAISE_APPLICATION_ERROR 는 사용자 정의 에러
+
+
+5. 월별 row 순회 (차감 루프)
+   annualleave 테이블 구조가 year(연도/월) 형식으로 over_leave_cnt에 적립하고 당월 적립실행 했다면
+   leave_flag가 1로 바뀌어지는 구조임, 즉 연차를 SUM 함수로 가져와야하고 만근시 적립되었다면 over_leave_cnt는 항상 1임
+   즉, over_leave_cnt가 2가 될 수 없는 구조임 leave_flag로 중복 적립을 막아두었기 때문에
+FOR rec IN (
+   SELECT * FROM
+      annualleave
+   WHERE
+      employee_id = p_emp_id
+   ORDER BY year
+)
+LOOP
+> FOR rec IN (...) LOOP : Cursor 방식으로 직원의 연차 데이터를 순회함
+> ORDER BY year : 오래된 월부터 차감하기 위해 정렬옵션을 준 것
+
+
+6. 루프 종료 조건
+EXIT WHEN v_leave <= 0;
+> 5번 월별 row 순회 (차감 루프)에서 선언한 FOR문의 종료 조건을 의미함
+> v_leave는 사용할 연차수를 의미함, 이게 0과 같아지거나 커지면 종료된다는 의미
+
+
+7. Cursor가 위치한 현재 월(row)에서 차감 가능 여부를 체크해야 함
+IF(rec.over_leave_cnt - rec.use_leave_cnt) >= v_leave THEN
+> 현재 row에서 남은 연차가 차감해야 할 연차보다 크거나 같으면 TRUE 문을 실행함
+
+
+8. 이번월 전부 차감
+UPDATE
+   annualleave
+SET
+   use_leave_cnt = use_leave_cnt + v_leave
+WHERE
+   employee_id = rec.employee_id AND
+   year = rec.year;
+v_leave := 0;
+> use_leave_cnt에 남은 연차 수 만큼 증가시킴
+> 차감 완료하면 v_leave를 0으로 초기화함
+
+
+9. 이번 월에 일부만 차감 ( 남은 연차 < 차감에 필요한 양)
+ELSE
+   UPDATE
+      annualleave
+   SET
+      use_leave_cnt = over_leave_cnt
+   WHERE
+      employee_id = rec.employee_id AND
+      year = rec.year;
+   v_leave := v_leave - (rec.over_leave_cnt - rec.use_leave_cnt);
+END IF;
+> 이번 월(row)의 최대 남은 연차만 차감함
+> 나머지 차감량은 v_leave에 남겨서 다음 월로 이어서 처리함
+
+
+10. 루프 종료 및 프로시저 종료
+   END LOOP;   : FOR LOOP 종료
+END            : 프로시저 종료
+/              : 컴파일 명령 종료
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
