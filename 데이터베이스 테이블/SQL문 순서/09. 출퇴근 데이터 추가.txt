@@ -3,8 +3,8 @@ INSERT INTO attendance_record
 SELECT
    D.currentDate,
    E.employee_id,
-   INTERVAL '06:59:50' HOUR TO SECOND,
-   INTERVAL '17:31:00' HOUR TO SECOND,
+   TO_DATE(D.currentDate || ' ' || ' 07:50', 'RR/MM/DD HH24:MI') AS atte_start,
+   TO_DATE(D.currentDate || ' ' || ' 17:01', 'RR/MM/DD HH24:MI') AS atte_end,
    1
 FROM (
 SELECT TO_DATE('25/05/01', 'RR/MM/DD') + LEVEL - 1 AS currentDate

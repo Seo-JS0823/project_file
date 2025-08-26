@@ -49,6 +49,7 @@ employee_id varchar2(13) not null,
 year date not null,
 over_leave_cnt number(2,1) not null,
 use_leave_cnt number(2,1) default 0 not null,
+leave_flag number(2,0) not null,
 foreign key
     (employee_id)
 references

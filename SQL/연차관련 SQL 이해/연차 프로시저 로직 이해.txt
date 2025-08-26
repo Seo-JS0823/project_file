@@ -1,0 +1,76 @@
+CREATE OR REPLACE PROCEDURE USE_ANNUAL_LEAVE(p_emp_id IN VARCHAR2, p_use_days IN NUMBER)
+IS
+   v_leave NUMBER := p_use_days;
+   v_remaining NUMBER;
+BEGIN
+   SELECT NVL(SUM(over_leave_cnt) - SUM(use_leave_cnt), 0)
+   INTO
+      v_remaining
+   FROM
+      annualleave
+   WHERE
+      employee_id = p_emp_id;
+   IF v_remaining < p_use_days THEN
+      RAISE_APPLICATION_ERROR(-20001, '남은 연차가 부족합니다.');
+   END IF;
+   
+   FOR rec IN (
+      SELECT * FROM
+         annualleave
+      WHERE
+         employee_id = p_emp_id
+      ORDER BY year
+   )
+   LOOP
+      EXIT WHEN v_leave <= 0;
+      IF (rec.over_leave_cnt - rec.use_leave_cnt) >= v_leave THEN
+         UPDATE
+            annualleave
+         SET
+            use_leave_cnt = use_leave_cnt + v_leave
+         WHERE
+            employee_id = rec.employee_id AND
+            year = rec.year;
+         v_leave := 0;
+      ELSE
+         UPDATE
+            annualleave
+         SET
+            use_leave_cnt = over_leave_cnt
+         WHERE
+            employee_id = rec.employee_id AND
+            year = rec.year;
+         v_leave := v_leave - (rec.over_leave_cnt - rec.use_leave_cnt);
+      END IF;
+   END LOOP;
+END;
+/
+==================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

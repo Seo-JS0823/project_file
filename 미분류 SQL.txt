@@ -1,0 +1,46 @@
+SELECT
+   E.employee_id, E.name, count(*) AS work_days, count(D.work_days) AS month_days
+FROM
+   attendance_record A, employees E, (
+SELECT
+   count(*) AS work_days
+FROM
+(
+SELECT
+   TO_DATE('2025-05-01', 'yyyy-mm-dd') + LEVEL - 1 AS DT
+FROM
+   DUAL
+CONNECT BY LEVEL <= last_day(TO_DATE('2025-05-01', 'yyyy-mm-dd')) - TO_DATE('2025-05-01', 'yyyy-mm-dd') + 1
+)
+WHERE
+   TO_CHAR(DT,'D') not in ('1', '7')
+   ) D
+WHERE
+   A.employee_id = E.employee_id AND
+   TO_CHAR(A.currentdate, 'yyyy-mm') = '2025-05' AND
+   A.atte_flag = 1 OR A.atte_flag = 5
+GROUP BY E.employee_id, E.name;
+
+
+
+
+
+
+
+
+
+
+UPDATE
+   annualleave
+SET
+   use_leave_cnt = use_leave_cnt + 2
+WHERE
+   employee_id = '30309844647' AND
+   TO_CHAR(year,'YYYYMM') IN (
+      SELECT 
+         TO_CHAR(year,'YYYYMM')
+      FROM
+         annualleave
+      WHERE
+         employee_id = '30309844647'
+      ORDER BY year);

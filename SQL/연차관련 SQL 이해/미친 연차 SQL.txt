@@ -1,0 +1,37 @@
+# 한 달 만근 시 연차 1개 적립 -> 적립되었으면 leave_flag가 1로 바뀜
+# leave_flag로 같은 월에 연차 중복 적립 방지 가능 (SELECT)
+MERGE INTO annualleave a
+USING (
+    SELECT
+        E.employee_id,
+        TO_DATE('2025-05-01','YYYY-MM-DD') AS year,
+        CASE
+            WHEN COUNT(A.atte_flag) = D.month_days THEN 1
+            ELSE 0
+        END AS over_leave_cnt,
+        0 AS use_leave_cnt,
+        1 AS leave_flag
+    FROM employees E
+    LEFT JOIN attendance_record A
+        ON A.employee_id = E.employee_id
+        AND TO_CHAR(A.currentDate,'YYYY-MM') = '2025-05'
+        AND (A.atte_flag = 1 OR A.atte_flag = 5)
+    CROSS JOIN (
+        SELECT COUNT(*) AS month_days
+        FROM (
+            SELECT TO_DATE('2025-05-01','YYYY-MM-DD') + LEVEL - 1 AS DT
+            FROM dual
+            CONNECT BY LEVEL <= LAST_DAY(TO_DATE('2025-05-01','YYYY-MM-DD')) 
+                              - TO_DATE('2025-05-01','YYYY-MM-DD') + 1
+        )
+        WHERE TO_CHAR(DT,'D') NOT IN ('1','7')
+    ) D
+    GROUP BY E.employee_id, D.month_days
+) SRC
+ON (a.employee_id = SRC.employee_id AND a.year = SRC.year)
+WHEN MATCHED THEN
+    UPDATE SET a.leave_flag = 1,
+               a.over_leave_cnt = a.over_leave_cnt + SRC.over_leave_cnt
+WHEN NOT MATCHED THEN
+    INSERT (employee_id, year, over_leave_cnt, use_leave_cnt, leave_flag)
+    VALUES (SRC.employee_id, SRC.year, SRC.over_leave_cnt, SRC.use_leave_cnt, SRC.leave_flag);
