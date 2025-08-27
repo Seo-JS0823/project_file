@@ -1,0 +1,40 @@
+INSERT INTO
+   annualleave (employee_id, leave_type, leave_count, content)
+SELECT
+   '30309844647', 'ACCUMULATE', 1, '2024년 1월 만근 연차'
+FROM dual
+   WHERE (
+      SELECT
+         COUNT(*) 
+      FROM
+         attendance_record
+      WHERE
+         employee_id = '30309844647' AND
+         TO_CHAR(currentDate, 'YYYY-MM') = '2024-01' AND
+         atte_flag = 1
+   ) = (
+   SELECT
+      count(*) AS work_days
+   FROM (
+      SELECT
+         TO_DATE('2024-01-01', 'yyyy-mm-dd') + LEVEL - 1 AS DT
+      FROM
+         DUAL
+      CONNECT BY LEVEL <= last_day(TO_DATE('2024-01-01', 'yyyy-mm-dd')) - TO_DATE('2024-01-01', 'yyyy-mm-dd') + 1)
+      WHERE TO_CHAR(DT,'D') not in ('1', '7')
+);
+
+남은연차 가져오기
+SELECT
+    employee_id,
+    SUM(CASE
+        WHEN leave_type = 'SAVE' THEN leave_count
+        WHEN leave_type = 'USE' THEN -leave_count
+        ELSE 0
+    END) AS remaining_leave
+FROM
+    annualleave
+WHERE
+    employee_id = '30309844647'
+GROUP BY
+    employee_id;
