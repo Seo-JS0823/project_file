@@ -13,7 +13,6 @@ CONNECT BY LEVEL <= (TO_DATE('25/08/22', 'RR/MM/DD') - TO_DATE('25/05/01', 'RR/M
 ) D
 CROSS JOIN (
    SELECT employee_id FROM employees
-   WHERE ROWNUM <= 26
 ) E
 WHERE
    TO_CHAR(D.currentDate, 'DY', 'NLS_DATE_LANGUAGE=ENGLISH') NOT IN ('SAT', 'SUN');

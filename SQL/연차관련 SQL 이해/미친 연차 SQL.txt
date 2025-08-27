@@ -35,3 +35,37 @@ WHEN MATCHED THEN
 WHEN NOT MATCHED THEN
     INSERT (employee_id, year, over_leave_cnt, use_leave_cnt, leave_flag)
     VALUES (SRC.employee_id, SRC.year, SRC.over_leave_cnt, SRC.use_leave_cnt, SRC.leave_flag);
+
+
+----------------------------------------------------------------------------------------------
+MERGE 필요없어져서 INSERT로 변경
+
+INSERT INTO annualleave (employee_id, year, over_leave_cnt, use_leave_cnt, leave_flag)
+SELECT
+   E.employee_id,
+   TO_DATE(#{year_month}, 'YYYY-MM-DD') AS year,
+   CASE
+      WHEN COUNT(A.atte_flag) = D.month_days THEN 1
+      ELSE 0
+   END AS over_leave_cnt,
+   0 AS use_leave_cnt,
+   1 AS leave_flag
+FROM
+   employees E LEFT JOIN attendance_record A
+ON
+   A.employee_id = E.employee_id AND
+   TO_CHAR(A.currentDate, 'YYYY-MM') = SUBSTR(#{year_month}, 1, 7) AND
+   (A.atte_flag = 1 OR A.atte_flag = 5)
+CROSS JOIN (
+   SELECT
+      COUNT(*) AS month_days
+   FROM (
+      SELECT
+         TO_DATE(#{year_month}, 'YYYY-MM-DD') + LEVEL -1 AS DT
+      FROM
+         dual
+      CONNECT BY LEVEL <= LAST_DAY(TO_DATE(#{year_month}, 'YYYY-MM-DD')) - TO_DATE(#{year_month}, 'YYYY-MM-DD') + 1
+   )
+   WHERE TO_CHAR(DT,'D') NOT IN ('1', '7')
+) D
+GROUP BY E.employee_id, D.month_days;

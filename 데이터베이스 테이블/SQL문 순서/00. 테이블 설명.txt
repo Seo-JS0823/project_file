@@ -22,6 +22,7 @@
 
 [EMPLOYEES TABLE] 직원 테이블
 사번코드(Java 자동생성)	: EMPLOYEE_ID
+비밀번호		: PASSWORD
 직원의 소속 부서코드	: DEPARTMENT_ID		부서 테이블 	FK
 근무형태코드		: WORKTYPE_ID		근무형태 테이블	FK
 직급코드		: POSITION_ID		직급 테이블	FK
