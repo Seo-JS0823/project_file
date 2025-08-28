@@ -44,7 +44,7 @@
 초과근무한 시간		: OT_WORK_TIME		INTERVAL 타입 SELECT 할 때 TO_CHAR(CURRENTDATE + ATTE_START, 'HH24"시" MI"분"') AS ATTE_START
 초과근무한 사유		: OT_CONTENT
 상태 플래그		: ATTE_FLAG
-			: 0 = 정상출근 / 1 = 정상퇴근 / 2 = 조퇴 / 3 = 지각 / 4 = 결석 / 5 = 초과근무
+			: 0 = 정상출근 / 1 = 정상퇴근 / 2 = 조퇴 / 3 = 지각 / 4 = 결석 / 5 = 승인대기
 
 
 

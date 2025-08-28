@@ -1,0 +1,14 @@
+SELECT
+    E.name,
+    TO_CHAR(LEAVE_START_DATE, 'YYYY-MM-DD') AS start_date,
+    TO_CHAR(LEAVE_END_DATE, 'YYYY-MM-DD') AS end_date,
+    TO_CHAR(SYSDATE, 'YYYY-MM-DD') AS now_date
+FROM
+    employees E, attendance_record AR, departments D, leave_history LH
+WHERE
+    E.department_id = D.department_id AND
+    E.employee_id = AR.employee_id AND
+    E.employee_id = LH.employee_id AND
+    TO_CHAR(AR.currentdate, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD') AND
+    LH.employee_id = '30309844647' AND
+    LH.status = 1;

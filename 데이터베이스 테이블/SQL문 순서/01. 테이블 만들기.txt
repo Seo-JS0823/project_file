@@ -85,9 +85,11 @@ primary key (currentDate, employee_id));
 # 검수 완료
 create table lateness(
 employee_id varchar2(13) null,
+created_date date not null,
 ness_date date not null,
 content varchar2(100 Byte) not null,
 status number(1,0) default 0 not null,
+atte_flag number(1,0) not null,
 foreign key
     (employee_id)
 references
