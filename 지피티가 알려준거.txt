@@ -1,0 +1,18 @@
+var calendar = new FullCalendar.Calendar(calendarEl, {
+  initialView: 'dayGridMonth',
+  locale: 'ko',
+  events: function(fetchInfo, successCallback, failureCallback) {
+    fetch('/api/vacations')
+      .then(response => response.json())
+      .then(data => {
+        // FullCalendar 이벤트 형식에 맞게 변환
+        let events = data.map(v => ({
+          title: v.department + " - " + v.employeeName, // ex) "개발팀 - 홍길동"
+          start: v.startDate,
+          end: v.endDate
+        }));
+        successCallback(events);
+      })
+      .catch(err => failureCallback(err));
+  }
+});

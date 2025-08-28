@@ -1,0 +1,33 @@
+# 수정전
+SELECT
+   SUM(CASE
+      WHEN leave_type = 'SAVE' THEN leave_count
+      WHEN leave_type = 'USE' THEN -leave_count
+      ELSE 0
+   END) AS leave_count
+FROM
+   annualleave
+WHERE
+   employee_id = #{employee_id}
+GROUP BY employee_id) D
+
+여기서 발생한 문제점. annualleave에 해당 직원이 받은 연차기록(row)이 하나도 없으면 출력된 row가 아에 없어서
+Java의 double 타입으로 리턴이 안되는 문제가 발생했음.
+해결방법은 COUNT() 함수는 검색된 row가 하나도 없으면 값이 0이기 때문에 서브쿼리를 활용해서 row가 없어도 값을 만들 수 있음
+
+# 수정 후
+SELECT
+   CASE
+   WHEN count(D.leave_count) = 0 THEN 0
+   END AS leave_count FROM
+(SELECT
+   SUM(CASE
+      WHEN leave_type = 'SAVE' THEN leave_count
+      WHEN leave_type = 'USE' THEN -leave_count
+      ELSE 0
+   END) AS leave_count
+FROM
+   annualleave
+WHERE
+   employee_id = #{employee_id}
+GROUP BY employee_id) D
